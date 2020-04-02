@@ -1,0 +1,71 @@
+server:
+  port: 9001
+  tomcat:
+    uri-encoding: UTF-8
+#swagger 开关
+swagger:
+  enable: true
+spring: #服务名称
+  application:
+    name: microservice-user
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3309/micro_service_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+    #url: jdbc:mysql://127.0.0.1:3306/mytest
+    username: root
+    password: 123456
+    #username: preproduction
+    #password: bIcXH0GPVTm4gv6XH0Gacvf
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    # 初始化，最小，最大连接数
+    initialSize: 1
+    # 获取数据库连接等待的超时时间
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  configuration:
+    lazyLoadingEnabled: true  #全局性设置懒加载。如果设为‘false'，则所有相关联的都会被初始化加载
+    aggressiveLazyLoading: false #设置为深度加载方式,  当访问主加载对象的关联对象时，才执行
+    lazyLoadTriggerMethods: "" #指定哪个对象的方法触发一次延迟加载。默认值：equals,clone,hashCode,toString,getset;
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl  #mybatis日志实现
+#eureka客户端配置
+eureka:
+  client:
+    register-with-eureka: true  #作为客户端，需要将自己注册到注册中心
+    fetch-registry: true        #作为客户端，需要从eureka获取注册信息
+    registry-fetch-interval-seconds: 30 #每隔多久刷新注册信息，默认30s
+    service-url: #客户端注册服务的地址
+      #defaultZone: http://47.98.142.237:9000/eureka,http://47.98.142.237:8999/eureka
+      defaultZone: http://127.0.0.1:9000/eureka
+  instance:
+    #是否优先使用ip地址来替代hostName作为实例的地址
+    prefer-ip-address: true
+    #服务向注册中心发送心跳续约的间隔，默认为30s
+    lease-renewal-interval-in-seconds: 10
+    #服务的失效时间，默认是90s;是指eureka server 多少秒之后认为服务失效
+    lease-expiration-duration-in-seconds: 30
+#配置Ribbon的负载均衡算法（默认使用轮循）
+microservice-resources:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#httpClient 替换feign的client
+feign:
+  httpclient:
+    enabled: false #使用okhttp替换httpclient
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true   #开启熔断功能

@@ -1,0 +1,26 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: eureka-server
+#单机版配置
+eureka:
+  client:
+    register-with-eureka: false  #是否将自己注册到euraka
+    fetch-registry: false  #是否需要从eureka获取注册信息
+    service-url:  #暴露的eureka注册地址
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+#集群版配置（后续集成要引入http basic认证及https的支持）
+#eureka:
+#  client:
+#    register-with-eureka: true  #是否将自己注册到euraka
+#    fetch-registry: true  #是否需要从eureka获取注册信息
+#    service-url:  #暴露的eureka注册地址
+#      defaultZone: http://127.0.0.1:8999/eureka
+  server:
+    #注册中心执行扫描剔除过期实例的周期，单位ms，默认60s
+    eviction-interval-timer-in-ms: 30000
+    #自我保护模式，在实际生产环境中,由于网络等原因导致服务提供者的续约心跳不能及时发送而导致被server端剔除，但是服务本身是
+    #健康的，如果这种大范围的误判会导致大部分服务不可用。而自我保护机制就是在最近15分钟接受的续约总次数小于总数的15%，则关
+    #闭租约的失效剔除，保护注册信息；
+    enable-self-preservation: false

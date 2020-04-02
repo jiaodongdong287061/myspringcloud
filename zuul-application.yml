@@ -1,0 +1,27 @@
+server:
+  port: 8887
+spring:
+  application:
+    name: service-zuul
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url: #客户端注册服务的地址
+      #defaultZone: http://47.98.142.237:9000/eureka,http://47.98.142.237:8999/eureka
+      defaultZone: http://127.0.0.1:9000/eureka
+  instance:
+    prefer-ip-address: true
+#zuul路由配置 (当path和serviceId名字相同时，可以不用配置)
+zuul:
+  #使系统默认使用的错误过滤器失效，使用自己的过滤器
+  SendErrorFilter:
+    error:
+      disable: true
+  routes:
+    microservice-user:    #服务名
+      path: /microservice-user    #需要转发的路径
+      serviceId: microservice-user   #转发到的服务
+    microservice-resources:    #服务名
+      path: /microservice-resources    #需要转发的路径
+      serviceId: microservice-resources   #转发到的服务
