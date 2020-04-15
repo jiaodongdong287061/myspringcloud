@@ -5,6 +5,8 @@ server:
 #swagger 开关
 swagger:
   enable: true
+mytest:
+  str: asdfw  
 spring: #服务名称
   application:
     name: microservice-user
