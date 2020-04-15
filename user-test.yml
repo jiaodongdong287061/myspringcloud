@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 9001
   tomcat:
     uri-encoding: UTF-8
 #swagger 开关
