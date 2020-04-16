@@ -9,13 +9,13 @@ spring: #服务名称
   application:
     name: microservice-resources
   datasource:
-    url: jdbc:mysql://39.105.8.241:3315/beiyuda_course_test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
-    #url: jdbc:mysql://127.0.0.1:3306/beiyuda_course_test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+    #url: jdbc:mysql://39.105.8.241:3315/beiyuda_course_test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://127.0.0.1:3306/beiyuda_course_test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
     #url: jdbc:mysql://127.0.0.1:3306/mytest
-    #username: root
-    #password: 123456
-    username: preproduction
-    password: bIcXH0GPVTm4gv6XH0Gacvf
+    username: root
+    password: 123456
+    #username: preproduction
+    #password: bIcXH0GPVTm4gv6XH0Gacvf
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
