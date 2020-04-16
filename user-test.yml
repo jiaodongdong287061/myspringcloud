@@ -6,7 +6,7 @@ server:
 swagger:
   enable: true
 mytest:
-  str: qffffffffff
+  str: qfffffdadaf
 spring: #服务名称
   application:
     name: microservice-user
